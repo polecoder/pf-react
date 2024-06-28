@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+
 export function CartWidget() {
+  const cart = useContext(CartContext);
+
   return (
     <div className="flex items-center gap-3 p-2">
       <svg
@@ -19,7 +24,7 @@ export function CartWidget() {
           fill="currentColor"
         />
       </svg>
-      <span>0</span>
+      <span>{cart.totalProducts}</span>
     </div>
   );
 }

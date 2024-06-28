@@ -1,9 +1,4 @@
-import React from "react";
-import { useCount } from "../hooks/useCount";
-
-function Counter({ max }) {
-  const { count, increment, decrement } = useCount(1, 1, max);
-
+function Counter({ count, increment, decrement, max }) {
   return (
     <div className="h-fit w-fit rounded-full border-[1px] border-dark text-center text-2xl">
       {count > 1 ? (
