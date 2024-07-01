@@ -1,4 +1,3 @@
-import React from "react";
 import products from "../data/products.json";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";

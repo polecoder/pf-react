@@ -1,11 +1,12 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 export function CartWidget() {
   const cart = useContext(CartContext);
 
   return (
-    <div className="flex items-center gap-3 p-2">
+    <Link to="/checkout" className="flex items-center gap-3 p-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="32"
@@ -25,6 +26,6 @@ export function CartWidget() {
         />
       </svg>
       <span>{cart.totalProducts}</span>
-    </div>
+    </Link>
   );
 }
