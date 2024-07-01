@@ -2,17 +2,33 @@ import Item from "./Item";
 import data from "../data/products.json";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../secrets/configFirebase";
 
 export function ItemListContainer() {
   const category = useParams().id;
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    if (category) {
+    const productsCollection = collection(db, "productos");
+    getDocs(productsCollection).then((res) => {
+      const productsArray = res.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      if (category) {
+        setProducts(
+          productsArray.filter((product) => product.category === category),
+        );
+      } else {
+        setProducts(productsArray);
+      }
+    });
+    /* if (category) {
       setProducts(data.filter((product) => product.category === category));
     } else {
       setProducts(data);
-    }
+    } */
   }, [category]);
 
   return (
@@ -22,7 +38,7 @@ export function ItemListContainer() {
       </h2>
       <div className="mx-auto grid max-w-[1200px] grid-cols-3 gap-x-8 gap-y-12 px-4 pt-4">
         {products.map((product) => (
-          <Item key={product.id} id={product.id} />
+          <Item key={product.id} item={product} />
         ))}
       </div>
     </div>

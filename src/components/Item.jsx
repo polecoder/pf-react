@@ -2,8 +2,7 @@ import products from "../data/products.json";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-function Item({ id }) {
-  const item = products.find((product) => product.id === id);
+function Item({ item }) {
   const category = useParams().id;
 
   const imgPath = category ? `../.${item.img}` : item.img;

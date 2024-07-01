@@ -1,16 +1,10 @@
-import products from "../data/products";
 import Counter from "./Counter";
-import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { useCount } from "../hooks/useCount";
 
-function ItemDetail() {
-  const { id } = useParams();
-  const item = products.find((product) => product.id === parseInt(id));
-
-  const max = item.stock;
-  const { count, increment, decrement } = useCount(1, 1, max);
+function ItemDetail({ item }) {
+  const { count, increment, decrement } = useCount(1, 1, item.stock);
 
   const cart = useContext(CartContext);
 
@@ -26,7 +20,7 @@ function ItemDetail() {
           count={count}
           increment={increment}
           decrement={decrement}
-          max={max}
+          max={item.stock}
         />
         <button
           onClick={() => cart.addItem(item, count)}
